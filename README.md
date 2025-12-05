@@ -1,1 +1,651 @@
-# Bar-site
+# Bar-site<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RY | THE ART OF MIXOLOGY</title>
+    <style>
+        /* --- НАСТРОЙКИ ДИЗАЙНА --- */
+        :root {
+            --bg-color: #0a0a0a;
+            --text-color: #f0f0f0;
+            /* Красный металлик из логотипа */
+            --accent-color: #b30000;
+            --accent-gradient: linear-gradient(135deg, #ff1a1a, #800000);
+            --secondary-bg: #141414;
+            --card-border: #333;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        /* --- ШАПКА --- */
+        header {
+            background-color: rgba(10,10,10,0.95);
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            box-sizing: border-box;
+            z-index: 1000;
+            border-bottom: 1px solid #222;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-img {
+            height: 50px; /* Регулируйте высоту логотипа */
+            margin-right: 15px;
+        }
+        
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-title {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--accent-color);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            line-height: 1;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .logo-subtitle {
+            font-size: 0.7rem;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: var(--accent-color);
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: var(--accent-gradient);
+            transition: width 0.3s;
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* --- ГЛАВНЫЙ ЭКРАН --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            /* Замените ссылку ниже на фото вашего бара, если нужно */
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1556135063-410025606356?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 20px;
+        }
+
+        .hero-logo {
+            width: 150px;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hero h2 {
+            font-size: 1.5rem;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-top: 10px;
+            margin-bottom: 30px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            max-width: 700px;
+            color: #ccc;
+        }
+
+        .btn {
+            background: var(--accent-gradient);
+            color: #fff;
+            padding: 15px 40px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            box-shadow: 0 4px 15px rgba(179, 0, 0, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(179, 0, 0, 0.5);
+        }
+
+        /* --- СЕКЦИИ --- */
+        section {
+            padding: 100px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 70px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* --- ПОРТФОЛИО --- */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .portfolio-item {
+            background: var(--secondary-bg);
+            height: 350px;
+            border-radius: 5px;
+            overflow: hidden;
+            position: relative;
+            border: 1px solid var(--card-border);
+        }
+        
+        /* Заглушки для фото. Замените ссылки на свои. */
+        .portfolio-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.8;
+            transition: 0.5s;
+        }
+
+        .portfolio-item:hover .portfolio-img {
+            opacity: 1;
+            transform: scale(1.05);
+        }
+
+        /* --- ЦЕНЫ (НОВЫЕ) --- */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+
+        .service-card {
+            background: var(--secondary-bg);
+            padding: 40px;
+            border-radius: 5px;
+            border: 1px solid var(--card-border);
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .service-card:hover {
+            border-color: var(--accent-color);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        
+        .service-card.featured {
+             border: 2px solid var(--accent-color);
+             transform: scale(1.02);
+        }
+
+        .service-title {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: #fff;
+            text-transform: uppercase;
+        }
+
+        .service-price {
+            font-size: 2.2rem;
+            color: var(--accent-color);
+            margin-bottom: 25px;
+            font-weight: bold;
+        }
+        
+        .service-price span {
+            font-size: 1rem;
+            color: #ccc;
+            font-weight: normal;
+        }
+
+        .service-description {
+            margin-bottom: 25px;
+            color: #ddd;
+            font-size: 1.05rem;
+        }
+        
+        .service-description p {
+            margin-bottom: 15px;
+        }
+        
+        .service-description ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .service-description li {
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .service-description li::before {
+            content: '•';
+            color: var(--accent-color);
+            position: absolute;
+            left: 0;
+            font-size: 1.2rem;
+        }
+
+        .service-bonus {
+            margin-top: auto;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            font-size: 0.9rem;
+            color: #ccc;
+        }
+        
+        .service-bonus strong {
+            color: var(--accent-color);
+        }
+        
+        .service-btn-container {
+            margin-top: 30px;
+            text-align: center;
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--accent-color);
+            color: var(--accent-color);
+            box-shadow: none;
+        }
+        
+        .btn-outline:hover {
+            background: var(--accent-gradient);
+            color: #fff;
+            border-color: transparent;
+        }
+
+
+        /* --- КОНТАКТЫ И ФОРМА --- */
+        .contact-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 60px;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .contact-info {
+            flex: 1;
+            min-width: 300px;
+            text-align: left;
+        }
+        
+        .contact-info h3 {
+             font-size: 1.8rem;
+             margin-bottom: 20px;
+             color: #fff;
+        }
+        
+        .contact-info p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            color: #ccc;
+        }
+
+        .tg-button {
+            display: inline-block;
+            background: #0088cc; /* Цвет Telegram */
+            color: white;
+            padding: 15px 35px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 20px;
+            font-size: 1.1rem;
+            transition: 0.3s;
+        }
+        
+        .tg-button:hover {
+            background: #0099e6;
+        }
+
+        .booking-form-container {
+            flex: 1.2;
+            min-width: 350px;
+            background: var(--secondary-bg);
+            padding: 40px;
+            border-radius: 5px;
+            border: 1px solid var(--card-border);
+        }
+        
+        .booking-form-container h3 {
+            text-align: center;
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            color: #fff;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            color: #ccc;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 15px;
+            background: #1a1a1a;
+            border: 1px solid #333;
+            color: #fff;
+            border-radius: 3px;
+            box-sizing: border-box;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: 0.3s;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            background: #222;
+        }
+        
+        select {
+            cursor: pointer;
+        }
+
+        /* --- ПОДВАЛ --- */
+        footer {
+            text-align: center;
+            padding: 50px;
+            border-top: 1px solid #222;
+            color: #777;
+            font-size: 0.9rem;
+            background: #0f0f0f;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <img src="image_0.png" alt="RY Logo" class="logo-img">
+            <div class="logo-text">
+                <span class="logo-title">RY</span>
+                <span class="logo-subtitle">The Art of Mixology</span>
+            </div>
+        </div>
+        <nav>
+            <a href="#portfolio">Портфолио</a>
+            <a href="#services">Услуги и Цены</a>
+            <a href="#contact">Контакты</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>RY</h1>
+        <h2>The Art of Mixology</h2>
+        <p>Профессиональный выездной бар, обучение и консалтинг. Сервис уровня 5* и экспертиза технолога для ваших событий и бизнеса.</p>
+        <a href="#services" class="btn">Выбрать услугу</a>
+    </section>
+
+    <section id="portfolio">
+        <h2 class="section-title">Мои работы</h2>
+        <div class="portfolio-grid">
+            <div class="portfolio-item"><img src="https://images.unsplash.com/photo-1514362545857-3bc16549766b?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" class="portfolio-img" alt="Cocktail 1"></div>
+            <div class="portfolio-item"><img src="https://images.unsplash.com/photo-1572116469696-958721b7d690?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" class="portfolio-img" alt="Cocktail 2"></div>
+            <div class="portfolio-item"><img src="https://images.unsplash.com/photo-1609345635084-098974392727?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" class="portfolio-img" alt="Cocktail 3"></div>
+        </div>
+    </section>
+
+    <section id="services">
+        <h2 class="section-title">Услуги и Стоимость</h2>
+        <div class="services-grid">
+            
+            <div class="service-card featured">
+                <h3 class="service-title">Выездной бар</h3>
+                <div class="service-price">4000—7000 ₽ <span>/ час</span></div>
+                <div class="service-description">
+                    <p>Организация профессиональной барной зоны на вашем мероприятии (свадьба, день рождения, корпоратив, вечеринка). Сервис уровня 5* отеля.</p>
+                    <ul>
+                        <li><strong>Профессиональный инвентарь:</strong> Полный комплект оборудования. Нужен только стол и посуда.</li>
+                        <li><strong>Экономия до 30%:</strong> Точная смета закупки алкоголя и ингредиентов от технолога.</li>
+                        <li><strong>Авторская карта:</strong> Меню из 3–5 коктейлей под вкусы гостей.</li>
+                        <li><strong>Чистота и стиль:</strong> Аккуратная работа, идеальная чистота.</li>
+                        <li><strong>Форматы:</strong> Коктейльный бар, Welcome-зона, Мастер-класс для гостей.</li>
+                    </ul>
+                </div>
+                <div class="service-bonus">
+                    <strong>Бонус:</strong> При заказе от 5 часов — разработка индивидуальной карты напитков и расчет сметы — бесплатно.
+                    <br><em>*Сумма зависит от кол-ва гостей и локации. Продление обсуждается.</em>
+                </div>
+                <div class="service-btn-container">
+                    <a href="#contact" class="btn" onclick="selectService('Выездной бар')">Заказать</a>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <h3 class="service-title">Обучение барменов</h3>
+                <div class="service-price">15 000 ₽ <span>/ услуга</span></div>
+                <div class="service-description">
+                    <p>Интенсивный тренинг для повышения квалификации персонала.</p>
+                    <ul>
+                        <li><strong>Тренинг 4–6 ч:</strong> Техника, скорость, сервировка.</li>
+                        <li><strong>Стандарты:</strong> Upsell SOP, чек-листы, стандарты санитарии.</li>
+                        <li><strong>Аттестация:</strong> Мини-экзамен и матрица навыков.</li>
+                    </ul>
+                </div>
+                <div class="service-btn-container">
+                    <a href="#contact" class="btn btn-outline" onclick="selectService('Обучение барменов')">Записаться</a>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <h3 class="service-title">Составление меню</h3>
+                <div class="service-price">25000—60000 ₽ <span>/ услуга</span></div>
+                <div class="service-description">
+                    <p>Комплексная разработка барного меню под ключ для заведений.</p>
+                    <ul>
+                        <li><strong>12–20 позиций:</strong> Кофе, матча, безалкогольные, бар на выбор.</li>
+                        <li><strong>Документация:</strong> Техкарты + калькуляции, целевая маржа.</li>
+                        <li><strong>Организация:</strong> План заготовок и бейчинга.</li>
+                        <li><strong>Внедрение:</strong> В iiko/r_keeper.</li>
+                        <li><strong>Обучение команды:</strong> До 4 часов.</li>
+                    </ul>
+                </div>
+                <div class="service-bonus">
+                    <strong>Бонус:</strong> Пост-поддержка 14 дней.
+                </div>
+                <div class="service-btn-container">
+                    <a href="#contact" class="btn btn-outline" onclick="selectService('Составление меню')">Заказать меню</a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2 class="section-title">Связаться со мной</h2>
+        <div class="contact-section">
+            
+            <div class="contact-info">
+                <h3>Мои контакты</h3>
+                <p>Подписывайтесь на мой Telegram канал. Там больше портфолио, бэкстейджей и полезной информации.</p>
+                <a href="https://t.me/bartenderRy" class="tg-button" target="_blank">
+                    <span style="margin-right: 10px;">✈️</span> Перейти в Telegram канал
+                </a>
+                
+                <div style="margin-top: 50px;">
+                    <h3>Прямая связь</h3>
+                    <p>📞 <a href="tel:+79990000000" style="color: var(--accent-color); text-decoration: none;">+7 (999) 000-00-00</a></p>
+                    <p>📍 Москва и МО (выезд обсуждается)</p>
+                    <p>✉️ <a href="mailto:ry.bar@example.com" style="color: var(--accent-color); text-decoration: none;">ry.bar@example.com</a></p>
+                </div>
+            </div>
+
+            <div class="booking-form-container">
+                <h3>Оставить заявку</h3>
+                <form id="orderForm">
+                    <div class="form-group">
+                        <label for="name" class="form-label">Ваше имя</label>
+                        <input type="text" id="name" placeholder="Иван" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone" class="form-label">Телефон / Мессенджер</label>
+                        <input type="text" id="phone" placeholder="+7 (999) ..." required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="service-type" class="form-label">Интересующая услуга</label>
+                        <select id="service-type" required>
+                            <option value="" disabled selected>Выберите услугу</option>
+                            <option value="Выездной бар">Выездной бар (4000-7000 ₽/ч)</option>
+                            <option value="Обучение барменов">Обучение барменов (15000 ₽)</option>
+                            <option value="Составление меню">Составление меню (25000-60000 ₽)</option>
+                            <option value="Другое">Другой вопрос</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                         <label for="details" class="form-label">Детали (дата, кол-во гостей, локация)</label>
+                        <textarea id="details" rows="4" placeholder="Например: Свадьба, 15.08, 50 человек, лофт в центре..."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn" style="width: 100%;">Отправить заявку</button>
+                    <p style="font-size: 0.8rem; color: #777; margin-top: 15px; text-align: center;">Нажимая кнопку, вы соглашаетесь на обработку персональных данных.</p>
+                </form>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <div class="logo-container" style="justify-content: center; margin-bottom: 20px; opacity: 0.7;">
+            <img src="image_0.png" alt="RY Logo" class="logo-img" style="height: 40px;">
+            <div class="logo-text" style="text-align: left;">
+                <span class="logo-title" style="font-size: 1.2rem;">RY</span>
+            </div>
+        </div>
+        <p>&copy; 2024 RY | THE ART OF MIXOLOGY. Все права защищены.</p>
+    </footer>
+
+    <script>
+        // Функция для автоматического выбора услуги в форме при клике на кнопку "Заказать" в карточке
+        function selectService(serviceName) {
+            const select = document.getElementById('service-type');
+            for (let i = 0; i < select.options.length; i++) {
+                if (select.options[i].value === serviceName) {
+                    select.selectedIndex = i;
+                    break;
+                }
+            }
+        }
+
+        document.getElementById('orderForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Сбор данных
+            let name = document.getElementById('name').value;
+            let phone = document.getElementById('phone').value;
+            let service = document.getElementById('service-type').value;
+            let details = document.getElementById('details').value;
+
+            // ВАЖНО: Замените YOUR_TG_NICKNAME на ваш реальный ник в Telegram (без @)
+            let myTgNickname = "YOUR_TG_NICKNAME"; 
+            
+            // Формируем сообщение
+            let message = `🔥 Новая заявка с сайта!%0A%0A👤 Имя: ${name}%0A📱 Контакт: ${phone}%0A🍸 Услуга: ${service}%0A📝 Детали: ${details ? details : 'Не указаны'}`;
+            
+            // Ссылка для открытия Telegram (диалог с вами)
+            let url = `https://t.me/${myTgNickname}?text=${message}`;
+            
+            // Открываем Telegram в новой вкладке
+            window.open(url, '_blank');
+            
+            // Опционально: Очистить форму после отправки
+            // document.getElementById('orderForm').reset();
+            
+            alert('Вы будете перенаправлены в Telegram для отправки сообщения.');
+        });
+        
+        // Плавный скролл по якорным ссылкам
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
