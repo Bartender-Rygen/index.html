@@ -618,13 +618,13 @@
             let details = document.getElementById('details').value;
 
             // ВАЖНО: Замените YOUR_TG_NICKNAME на ваш реальный ник в Telegram (без @)
-            let myTgNickname = "@Bartender_Ry"; 
+            let myTgNickname = "Bartender_Ry"; 
             
             // Формируем сообщение
             let message = `🔥 Новая заявка с сайта!%0A%0A👤 Имя: ${name}%0A📱 Контакт: ${phone}%0A🍸 Услуга: ${service}%0A📝 Детали: ${details ? details : 'Не указаны'}`;
             
             // Ссылка для открытия Telegram (диалог с вами)
-            let url = `https://t.me/${myTgNickname}?text=${message}`;
+            let url = `https://t.me/${Bartender_Ry}?text=${message}`;
             
             // Открываем Telegram в новой вкладке
             window.open(url, '_blank');
