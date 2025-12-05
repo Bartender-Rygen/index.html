@@ -597,7 +597,7 @@
     </footer>
 
     <script>
-        
+        // Функция для автоматического выбора услуги в форме при клике на кнопку "Заказать" в карточке
         function selectService(serviceName) {
             const select = document.getElementById('service-type');
             for (let i = 0; i < select.options.length; i++) {
@@ -611,30 +611,28 @@
         document.getElementById('orderForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
-         
+            // Сбор данных
             let name = document.getElementById('name').value;
             let phone = document.getElementById('phone').value;
             let service = document.getElementById('service-type').value;
             let details = document.getElementById('details').value;
 
-            
+            // Твой ник (исправлено)
             let myTgNickname = "Bartender_Ry"; 
             
-            
+            // Формируем сообщение
             let message = `🔥 Новая заявка с сайта!%0A%0A👤 Имя: ${name}%0A📱 Контакт: ${phone}%0A🍸 Услуга: ${service}%0A📝 Детали: ${details ? details : 'Не указаны'}`;
             
-          
-            let url = `https://t.me/${Bartender_Ry}?text=${message}`;
+            // Ссылка для открытия Telegram (ИСПРАВЛЕНО: вставлена переменная myTgNickname)
+            let url = `https://t.me/${myTgNickname}?text=${message}`;
             
-          
+            // Открываем Telegram в новой вкладке
             window.open(url, '_blank');
             
-        
-            
-            alert('Вы будете перенаправлены в Telegram для отправки сообщения.');
+            alert('Сейчас откроется Telegram для отправки сообщения!');
         });
         
-        
+        // Плавный скролл по якорным ссылкам
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -644,5 +642,3 @@
             });
         });
     </script>
-</body>
-</html>
