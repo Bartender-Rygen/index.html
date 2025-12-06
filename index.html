@@ -428,6 +428,74 @@
             font-size: 0.9rem;
             background: #0f0f0f;
         }
+        /* --- СТИЛИ ДЛЯ ЧЕКБОКСОВ --- */
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            background: #1a1a1a;
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid #333;
+        }
+
+        .custom-checkbox {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            font-size: 1rem;
+            color: #ccc;
+            user-select: none;
+        }
+
+        .custom-checkbox input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+        }
+
+        .checkmark {
+            height: 20px;
+            width: 20px;
+            background-color: #333;
+            border-radius: 3px;
+            margin-right: 15px;
+            position: relative;
+            transition: 0.3s;
+        }
+
+        /* При наведении */
+        .custom-checkbox:hover input ~ .checkmark {
+            background-color: #444;
+        }
+
+        /* Когда выбрано */
+        .custom-checkbox input:checked ~ .checkmark {
+            background-color: var(--accent-color);
+        }
+
+        /* Галочка внутри */
+        .checkmark:after {
+            content: "";
+            position: absolute;
+            display: none;
+        }
+
+        .custom-checkbox input:checked ~ .checkmark:after {
+            display: block;
+        }
+
+        .custom-checkbox .checkmark:after {
+            left: 7px;
+            top: 3px;
+            width: 5px;
+            height: 10px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
 
     </style>
 </head>
@@ -566,31 +634,13 @@
                 </div>
         
         </div>
-    </section>
-            </div>
 
-            <div class="service-card" style="padding: 0; overflow: hidden; border: 1px solid #333;">
-                <div style="height: 200px; overflow: hidden;">
-                    <img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.8;" alt="News 3">
-                </div>
-                <div style="padding: 25px;">
-                    <h3 style="color: #fff; margin-top: 0;">Bar Convent Berlin</h3>
-                    <p style="color: #ccc; font-size: 0.9rem;">Итоги крупнейшей барной выставки Европы. Новое оборудование и революция в мире льда.</p>
-                    <a href="https://www.barconvent.com/" target="_blank" class="btn btn-outline" style="font-size: 0.8rem; margin-top: 10px; display: inline-block;">Подробнее</a>
-                </div>
-            </div>
 
-        </div>
-    </section>
-            </script>
-
-        </div>
+            
+    
         
-        <div style="text-align: center; margin-top: 30px;">
-            <a href="https://t.me/bartenderRy" class="btn btn-outline" target="_blank">Перейти в канал</a>
-        </div>
-    </section>
-        </div>
+       
+        
     
     </section>
 
@@ -613,37 +663,57 @@
                 </div>
             </div>
 
-            <div class="booking-form-container">
+           <div class="booking-form-container">
                 <h3>Оставить заявку</h3>
-                <form id="orderForm">
+                
+                <form id="orderForm" action="https://formspree.io/f/xzznvokp" method="POST">
+                    
                     <div class="form-group">
                         <label for="name" class="form-label">Ваше имя</label>
-                        <input type="text" id="name" placeholder="Иван" required>
+                        <input type="text" id="name" name="name" placeholder="Иван" required>
                     </div>
                     
                     <div class="form-group">
                         <label for="phone" class="form-label">Телефон / Мессенджер</label>
-                        <input type="text" id="phone" placeholder="+7 (999) ..." required>
+                        <input type="text" id="phone" name="phone" placeholder="+7 (999) ..." required>
                     </div>
                     
                     <div class="form-group">
-                        <label for="service-type" class="form-label">Интересующая услуга</label>
-                        <select id="service-type" required>
-                            <option value="" disabled selected>Выберите услугу</option>
-                            <option value="Выездной бар">Выездной бар (4000-7000 ₽/ч)</option>
-                            <option value="Обучение барменов">Обучение барменов (15000 ₽)</option>
-                            <option value="Составление меню">Составление меню (25000-60000 ₽)</option>
-                            <option value="Другое">Другой вопрос</option>
-                        </select>
+                        <label class="form-label">Что вас интересует? (можно несколько)</label>
+                        <div class="checkbox-group">
+                            <label class="custom-checkbox">
+                                <input type="checkbox" name="services[]" value="Выездной бар">
+                                <span class="checkmark"></span>
+                                Выездной бар
+                            </label>
+                            
+                            <label class="custom-checkbox">
+                                <input type="checkbox" name="services[]" value="Обучение">
+                                <span class="checkmark"></span>
+                                Обучение персонала
+                            </label>
+                            
+                            <label class="custom-checkbox">
+                                <input type="checkbox" name="services[]" value="Меню">
+                                <span class="checkmark"></span>
+                                Разработка меню
+                            </label>
+
+                            <label class="custom-checkbox">
+                                <input type="checkbox" name="services[]" value="Другое">
+                                <span class="checkmark"></span>
+                                Другой вопрос
+                            </label>
+                        </div>
                     </div>
                     
                     <div class="form-group">
                          <label for="details" class="form-label">Детали (дата, кол-во гостей, локация)</label>
-                        <textarea id="details" rows="4" placeholder="Например: Свадьба, 15.08, 50 человек, лофт в центре..."></textarea>
+                        <textarea id="details" name="message" rows="4" placeholder="Например: Свадьба, 15.08, 50 человек..."></textarea>
                     </div>
 
-                    <button type="submit" class="btn" style="width: 100%;">Отправить заявку</button>
-                    <p style="font-size: 0.8rem; color: #777; margin-top: 15px; text-align: center;">Нажимая кнопку, вы соглашаетесь на обработку персональных данных.</p>
+                    <button type="submit" class="btn" style="width: 100%;">Отправить на почту</button>
+                    <p style="font-size: 0.8rem; color: #777; margin-top: 15px; text-align: center;">Мы свяжемся с вами в ближайшее время.</p>
                 </form>
             </div>
 
@@ -670,30 +740,9 @@
                     break;
                 }
             }
-        }
+    
 
-        document.getElementById('orderForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Сбор данных
-            let name = document.getElementById('name').value;
-            let phone = document.getElementById('phone').value;
-            let service = document.getElementById('service-type').value;
-            let details = document.getElementById('details').value;
-
-            // Твой ник (исправлено)
-            let myTgNickname = "Bartender_Ry"; 
-            
-            // Формируем сообщение
-            let message = `🔥 Новая заявка с сайта!%0A%0A👤 Имя: ${name}%0A📱 Контакт: ${phone}%0A🍸 Услуга: ${service}%0A📝 Детали: ${details ? details : 'Не указаны'}`;
-            
-            // Ссылка для открытия Telegram (ИСПРАВЛЕНО: вставлена переменная myTgNickname)
-            let url = `https://t.me/${myTgNickname}?text=${message}`;
-            
-            // Открываем Telegram в новой вкладке
-            window.open(url, '_blank');
-            
-            alert('Сейчас откроется Telegram для отправки сообщения!');
+       
         });
         
         // Плавный скролл по якорным ссылкам
